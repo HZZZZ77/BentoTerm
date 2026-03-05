@@ -1,0 +1,8 @@
+layout:
+  columns: 2
+  rows: 2
+widgets:
+  - type: sys_monitor
+  - type: network_ping
+  - type: agent_monitor
+  - type: text_placeholder
