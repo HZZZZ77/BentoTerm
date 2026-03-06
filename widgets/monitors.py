@@ -14,17 +14,67 @@ from textual.containers import Grid
 # 🧱 第一部分：海量极客组件库 (加入全方位防崩溃保护)
 # ==========================================
 
+import os
+import time
+import json
+import socket
+import urllib.request
+import subprocess
+import psutil
+from textual.widgets import Static
+
 class SysMonitor(Static):
     def on_mount(self):
         self.update_sys_info()
         self.set_interval(1.0, self.update_sys_info)
+
     def update_sys_info(self):
         try:
-            cpu = psutil.cpu_percent()
-            ram = psutil.virtual_memory().percent
-            self.update(f"💻 System\n\nCPU: {cpu}%\nRAM: {ram}%\nStatus: 🟢")
-        except Exception as e:
-            self.update(f"💻 System\n\nError 🔴")
+            # 1. 抓取 CPU 数据
+            cpu_percent = psutil.cpu_percent()
+            cpu_count = psutil.cpu_count(logical=True)
+            
+            # 2. 抓取内存数据
+            mem = psutil.virtual_memory()
+            mem_total = mem.total / (1024 ** 3)
+            mem_used = mem.used / (1024 ** 3)
+            
+            # 3. 抓取磁盘数据 (根目录)
+            disk = psutil.disk_usage('/')
+            
+            # 4. 抓取 MacBook 电池数据
+            battery = psutil.sensors_battery()
+            batt_str = f"🔋 {battery.percent}% {'(⚡Charging)' if battery.power_plugged else ''}" if battery else "🔌 AC Power"
+
+            # 🛠️ 制造 ASCII 进度条的魔法函数
+            def make_bar(percent, width=20):
+                filled = int(width * percent / 100)
+                # 使用实心方块和点阵方块拼接
+                return "█" * filled + "░" * (width - filled)
+
+            # 🍎 苹果风排版布局
+            content = f"""
+ Mac System Overview
+
+[ CPU Core ] -----------------------
+Usage: {make_bar(cpu_percent)} {cpu_percent}%
+Cores: {cpu_count} Logical Threads
+
+[ Memory ] -------------------------
+Usage: {make_bar(mem.percent)} {mem.percent}%
+Alloc: {mem_used:.1f} GB / {mem_total:.1f} GB
+
+[ Storage & Power ] ----------------
+Disk:  {make_bar(disk.percent)} {disk.percent}%
+Power: {batt_str}
+
+Status: 🟢 System Running Optimal
+"""
+            self.update(content.strip())
+        except Exception:
+            self.update(" Mac System\n\nError fetching data 🔴")
+
+# ... 保持下面的其他类代码不变 ...
 
 class BandwidthMonitor(Static):
     def on_mount(self):

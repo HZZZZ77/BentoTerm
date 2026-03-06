@@ -48,6 +48,20 @@ class BentoTermApp(App):
     BandwidthMonitor, GithubRadar {
         column-span: 2; 
     }
+    /* 🍏 3. Apple 布局魔法：打破死板，引入大小卡片！ */
+    
+    /* 核心大面板 (2x2 Large Widget)：占据左上角主导地位 */
+    SysMonitor {
+        column-span: 2; 
+        row-span: 2;    
+        content-align: left middle; /* 文字靠左对齐，整体垂直居中 */
+        padding-left: 4;            /* 左侧留出呼吸感空白 */
+    }
+
+    /* 宽屏长条面板 (2x1 Medium Widget)：放在右侧上下排列 */
+    BandwidthMonitor, GithubRadar {
+        column-span: 2; 
+    }
     """
     BINDINGS = [("q", "quit", "Exit BentoTerm")]
 
