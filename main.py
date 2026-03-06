@@ -10,15 +10,30 @@ class BentoTermApp(App):
     """BentoTerm 核心调度引擎"""
     
     CSS = """
+    /* 1. 纯黑背景：模拟 OLED 屏幕的深邃感，极其干净 */
+    Screen {
+        background: #000000; 
+    }
+
     Grid {
         grid-size: 4 3; 
         grid-gutter: 1 2;
         padding: 1 2;
     }
+
+    /* 2. Apple Widget 风格：高级灰底色 + 极细的深色圆角边框 + 纯净的白字 */
     Static {
-        border: solid green;
+        background: #1c1c1e;   
+        color: #f5f5f7;        
+        border: round #3a3a3c; 
         height: 100%;
         content-align: center middle;
+    }
+
+    /* 3. 克制的交互：鼠标悬停时，背景微微提亮，边框亮起苹果标志性的科技蓝 */
+    Static:hover {
+        background: #2c2c2e;   
+        border: round #0a84ff; 
     }
     """
     BINDINGS = [("q", "quit", "Exit BentoTerm")]
