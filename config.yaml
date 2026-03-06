@@ -1,8 +1,16 @@
 layout:
-  columns: 2
-  rows: 2
+  columns: 4
+  rows: 3
 widgets:
   - type: sys_monitor
-  - type: network_ping
-  - type: agent_monitor
+  - type: bandwidth_monitor
+  - type: load_uptime
+  - type: port_sniffer
+  - type: git_status
+  - type: docker_dashboard
+  - type: db_cache_probe
+  - type: live_log_tailer
+  - type: api_health
+  - type: github_radar
+  - type: llm_api_tracker
   - type: text_placeholder
