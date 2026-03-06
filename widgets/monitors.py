@@ -35,25 +35,41 @@ class SysMonitor(Static):
             battery = psutil.sensors_battery()
             batt_str = f"🔋 {battery.percent}% {'(⚡)' if battery.power_plugged else ''}" if battery else "🔌 AC Power"
 
-            # 🛠️ 极其克制的 ASCII 进度条 (宽度从 20 压缩到 12)
+           # 🛠️ 颜色魔法：会根据负载自动变色的 ASCII 进度条
             def make_bar(percent, width=12):
                 filled = int(width * percent / 100)
-                return "█" * filled + "░" * (width - filled)
+                bar_str = "█" * filled + "░" * (width - filled)
+                
+                # 动态判断颜色
+                if percent < 50:
+                    color = "green"
+                elif percent <= 80:
+                    color = "yellow"
+                else:
+                    color = "red"
+                    
+                # 返回带有富文本标记的字符串 (Textual 会自动解析并上色)
+                return f"[{color}]{bar_str}[/{color}]"
+                
+            def get_color(percent):
+                if percent < 50: return "green"
+                elif percent <= 80: return "yellow"
+                else: return "red"
 
-            # 🍎 苹果极简排版：文字极度精简，对齐冒号
+            # 🍎 苹果极简排版：加入动态颜色标签
             content = f"""
  Mac System Overview
 
 [ CPU ] -------------
-Use: {make_bar(cpu_percent)} {cpu_percent}%
+Use: {make_bar(cpu_percent)} [{get_color(cpu_percent)}]{cpu_percent}%[/{get_color(cpu_percent)}]
 Cor: {cpu_count} Threads
 
 [ Memory ] ----------
-Use: {make_bar(mem.percent)} {mem.percent}%
+Use: {make_bar(mem.percent)} [{get_color(mem.percent)}]{mem.percent}%[/{get_color(mem.percent)}]
 Cap: {mem_used:.1f}G / {mem_total:.1f}G
 
 [ Storage & Bat ] ---
-HDD: {make_bar(disk.percent)} {disk.percent}%
+HDD: {make_bar(disk.percent)} [{get_color(disk.percent)}]{disk.percent}%[/{get_color(disk.percent)}]
 Pwr: {batt_str}
 
 🟢 System Optimal
