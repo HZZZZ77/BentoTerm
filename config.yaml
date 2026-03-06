@@ -2,15 +2,15 @@ layout:
   columns: 4
   rows: 3
 widgets:
+  # 1. 核心控制大屏 (将横跨 2x2)
   - type: sys_monitor
+  
+  # 2. 两个宽屏长条 (将各横跨 2x1)
   - type: bandwidth_monitor
-  - type: load_uptime
-  - type: port_sniffer
-  - type: git_status
-  - type: docker_dashboard
-  - type: db_cache_probe
-  - type: live_log_tailer
-  - type: api_health
   - type: github_radar
+  
+  # 3. 四个基础小卡片 (保持 1x1)
+  - type: docker_dashboard
   - type: llm_api_tracker
-  - type: text_placeholder
+  - type: load_uptime
+  - type: api_health
