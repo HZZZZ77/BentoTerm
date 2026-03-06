@@ -11,75 +11,75 @@
 |____/ \___|_| |_|\__\___/|_|\___|_|  |_| |_| |_|
 A highly customizable, modular TUI dashboard for your terminal.
 
-[ 特性 ] • [ 安装 ] • [ 配置 ] • [ 路线图 ]
+[ Features ] • [ Installation ] • [ Configuration ] • [ Roadmap ]
 
 </div>
 
-💡 为什么选择 BentoTerm？
-作为开发者，我们不应该在终端里开启数十个零散的监控窗口。BentoTerm 通过极其优雅的 YAML 声明式配置，让你像拼便当（Bento）一样，将系统资源、网络延迟、本地守护进程等关键数据，完美整合进一个现代化的终端图形界面 (TUI) 中。
+💡 Why BentoTerm?
+As developers, we shouldn't have to juggle dozens of scattered monitoring windows in our terminals. BentoTerm leverages elegant, declarative YAML configuration, allowing you to assemble critical data—like system resources, network latency, and local daemons—into a modern Terminal User Interface (TUI), just like packing a Bento box.
 
-Demo 演示图预留位 > (提示：后续可以用录屏工具录制一张 BentoTerm 在 MacBook 终端里运行的 GIF 动图放在这里，视觉效果拉满)
+[Demo GIF Placeholder] > (Drop a cool GIF of BentoTerm running in your terminal here later)
 
-⚡ 核心特性
-🧱 声明式网格系统：基于 YAML 的零代码布局，自由定义模块的行列占比。
+⚡ Features
+🧱 Declarative Grid System: Zero-code layout based on YAML. Freely define the row and column ratios of your modules.
 
-🚀 异步非阻塞引擎：底层采用现代化的 Python Textual 框架，毫秒级渲染，极低资源占用。
+🚀 Asynchronous Engine: Powered by the modern Python Textual framework. Millisecond rendering with a minimal resource footprint.
 
-🔌 即插即用的组件库 (Widgets)：
+🔌 Plug-and-Play Widgets:
 
-sys_monitor：硬件状态看板（CPU、内存、磁盘）。
+sys_monitor: Hardware status board (CPU, RAM, Disk).
 
-network_ping：全球关键节点连通性与延迟探测。
+network_ping: Global node connectivity and latency probing.
 
-agent_monitor：本地守护进程（如 OpenClaw）存活状态监控。
+agent_monitor: Local daemon (e.g., OpenClaw AI Agent) survival status monitoring.
 
-🛠️ 极客友好：跨平台原生支持，纯键盘快捷键驱动。
+🛠️ Geek Friendly: Native cross-platform support, driven entirely by keyboard shortcuts.
 
-📦 极速构建
-推荐使用虚拟环境进行隔离安装，保持系统环境纯净：
+📦 Installation
+It is highly recommended to use a virtual environment for an isolated installation to keep your system clean:
 
 Bash
-# 1. 克隆仓库
+# 1. Clone the repository
 git clone [https://github.com/HZZZZ77/BentoTerm.git](https://github.com/HZZZZ77/BentoTerm.git)
 cd BentoTerm
 
-# 2. 构建沙盒环境
+# 2. Setup the sandbox environment
 python3 -m venv venv
 source venv/bin/activate
 
-# 3. 安装依赖引擎
+# 3. Install the core engine
 pip install -r requirements.txt
-🎮 玩法指南
-在终端中启动你的仪表盘：
+🎮 Usage
+Fire up your dashboard in the terminal:
 
 Bash
 python main.py
-⚙️ 定制你的面板
-BentoTerm 的灵魂在于数据驱动。打开项目根目录的 config.yaml，按你的喜好修改它，终端世界将随之改变：
+⚙️ Configuration
+The soul of BentoTerm is data-driven. Open config.yaml in the project root, tweak it to your liking, and watch your terminal world transform instantly:
 
 YAML
-# 定义全局网格：2列 x 2行
+# Define the global grid: 2 columns x 2 rows
 layout:
   columns: 2
   rows: 2
 
-# 挂载监控模块
+# Mount the monitoring widgets
 widgets:
   - type: sys_monitor
   - type: network_ping
   - type: agent_monitor
   - type: text_placeholder
-🗺️ 演进路线图
-[x] 核心引擎：YAML 动态解析与网格布局系统
+🗺️ Roadmap
+[x] Core Engine: Dynamic YAML parsing & grid layout system
 
-[ ] 数据注入：接入真实物理机数据流
+[ ] Data Injection: Integrate real-time physical machine data streams (e.g., psutil)
 
-[ ] 视觉进阶：引入 Catppuccin 等极客主题色与动态边框
+[ ] Visuals: Introduce geeky themes (Catppuccin, Dracula) and dynamic borders
 
-[ ] 扩展生态：支持通过 Bash/Python 脚本自定义 Widget
+[ ] Ecosystem: Support custom Widgets via Bash/Python scripts
 
-🤝 参与重构
-如果你想开发一个新的 Widget（比如 GitHub 消息流、服务器 SSH 状态），请随时提交 Pull Request！
+🤝 Contributing
+Any crazy ideas are welcome here. If you want to develop a new Widget (e.g., GitHub feed, server SSH status, weather), feel free to submit a Pull Request!
 
-📄 许可证
-本项目基于 MIT License 协议开源。
+📄 License
+This project is open-sourced under the MIT License.
